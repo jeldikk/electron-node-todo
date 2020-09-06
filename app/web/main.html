@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title of the Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul style="list-style-type: none; display: flex; flex-direction: row;margin: 0 auto;">
+                <li style="flex-grow: 1;">
+                    Home
+                </li>
+                <li style="flex-grow: 1">
+                    About
+                </li>
+                <li style="flex-grow: 1">
+                    Using the app
+                </li>
+                <li style="flex-grow: 1">
+                    click to know more
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>To do List</h2>
+        <ul id="to-do-list">
+
+        </ul>
+        <!-- <button type="button"> clear </button> -->
+    </main>
+
+    <script>
+        const {ipcRenderer} = require('electron');
+
+        let ul_ele = document.getElementById('to-do-list');
+
+
+        ipcRenderer.on('todo:add', (event,message)=>{
+
+            createToDoItem(message)
+        })
+
+        function createToDoItem(to_do){
+
+            let li_ele = document.createElement("li");
+            let text_node = document.createTextNode(to_do);
+            li_ele.appendChild(text_node);
+            ul_ele.appendChild(li_ele);
+        }
+
+        ipcRenderer.on("todo:clear",(event,message)=>{
+            // let ul_ele = document.getElementById("to-do-list");
+            ul_ele.innerHTML = "";
+        })
+    </script>
+    
+</body>
+</html>
