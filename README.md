@@ -3,10 +3,10 @@ ___
 
 The main goal of this project is to learn how interprocess communication happens, how to create a seperate window for taking information from user
 
-`sh
+```sh
 $ npm install -s electron
 
-`
+```
 
 ## Run
 
